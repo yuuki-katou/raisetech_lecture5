@@ -23,7 +23,7 @@ public class Main {
      */
     public static void main(String[] args) {
         BookManager bookManager = new BookManager(CSV_FILEPATH);
-        List<Books>booksList = bookManager.readBooks();
+        List<Books> booksList = bookManager.readBooks();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             while (true) {
 
@@ -46,6 +46,7 @@ public class Main {
 
     /**
      * ユーザーからキーワード入力を受け取るためのメソッド
+     *
      * @param br BufferedReader
      * @return ユーザーからの入力
      * @throws IOException 入力の読み取り中の例外
@@ -58,8 +59,9 @@ public class Main {
 
     /**
      * 与えられたキーワードに基づいて書籍を検索し、結果を表示するメソッド
-     * @param books CSVから読み取った書籍のリスト
-     * @param keyword　検索キーワード
+     *
+     * @param books   CSVから読み取った書籍のリスト
+     * @param keyword 　検索キーワード
      */
     private static void displaySearchResults(List<Books> books, String keyword) {
         List<Books> matchedBooks = books.stream()
@@ -70,7 +72,7 @@ public class Main {
             System.out.println(NO_MATCH_MESSAGE);
         } else {
             matchedBooks.forEach(book -> {
-                System.out.printf("検索結果\n商品名：%s\n価格：%d円\n著者：%s\n出版日：%s\n詳細：%s\n", book.getTitle(), book.getPrice(), book.getAuthor(), book.getPublishDate(), book.getDescription());
+                System.out.printf("検索結果\n商品名：%s\n価格：%s円\n著者：%s\n出版日：%s\n詳細：%s\n", book.getTitle(), String.format("%,d", book.getPrice()), book.getAuthor(), book.getPublishDate(), book.getDescription());
                 System.out.println();
             });
         }
